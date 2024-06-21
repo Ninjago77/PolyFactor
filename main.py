@@ -337,7 +337,7 @@ def main(page: ft.Page):
     if page.width <= 350:
         view_scale = page.width/400
     WRAP_WIDTH = page.width-20
-    # WRAP_WIDTH_v2 = page.width*(15/16)*(1/2)
+    WRAP_WIDTH_v2 = page.width*(15/16)*(1/2)
     WRAP_HEIGHT = page.height*(3/4)
     Display_Skill = ft.Container(scale=view_scale,margin=ft.margin.only(left=1,right=1)) # TODO: fix bottom padding
     def build_dragtarget(q:Question):
@@ -538,7 +538,9 @@ def main(page: ft.Page):
             # alignment=ft.MainAxisAlignment.CENTER,
             # TODO: above line really important
         ),
-        ft.Card(content=ft.Container(content=(ft.Column(
+        ft.Card(width=page.width-40,
+                height=(page.height*(7/8))-40,
+                content=ft.Container(content=(ft.Column(
             controls=[
                 ft.Row(
                     controls=[ft.Draggable(
@@ -562,7 +564,7 @@ def main(page: ft.Page):
                 ft.Row(
                     controls=DRAGTARGETS,
                     wrap=True,
-                    # width=WRAP_WIDTH_v2,
+                    width=WRAP_WIDTH_v2,
                     # vertical_alignment=ft.CrossAxisAlignment.CENTER,
                     expand=True,
                 ),
@@ -616,9 +618,7 @@ def main(page: ft.Page):
     
     PARENT_OF_DRAGTARGETS = SkillControls[-2].content.content.controls[-1]
     if mobile:
-        SkillControls[-2] = SkillControls[-2].content.content
-        SkillControls[-2].scroll = ft.ScrollMode.AUTO
-        
+        SkillControls[-2].content.content.controls[-1].scroll = ft.ScrollMode.AUTO
     
     def nav_rail_switch(e):
         global Skill_Index,Display_Skill,mobile
@@ -683,7 +683,7 @@ def main(page: ft.Page):
         Nav_Control_Dest(
             icon=ft.icons.GRID_VIEW,
             selected_icon=ft.icons.GRID_VIEW_ROUNDED,
-            label="Draggable Factoring",
+            label="Factor Playground",
         ),
         Nav_Control_Dest(
             icon=ft.icons.INFO_OUTLINE_ROUNDED,
